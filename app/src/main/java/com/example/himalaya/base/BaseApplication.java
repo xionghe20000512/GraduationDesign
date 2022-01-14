@@ -2,13 +2,8 @@ package com.example.himalaya.base;
 
 import android.app.Application;
 import android.content.Context;
-import android.util.Log;
 
-import androidx.annotation.NonNull;
-
-import com.bun.miitmdid.core.MdidSdkHelper;
-import com.bun.miitmdid.interfaces.IIdentifierListener;
-import com.bun.miitmdid.interfaces.IdSupplier;
+import com.example.himalaya.utils.LogUtil;
 import com.ximalaya.ting.android.opensdk.constants.DTransferConstants;
 import com.ximalaya.ting.android.opensdk.datatrasfer.CommonRequest;
 import com.ximalaya.ting.android.opensdk.datatrasfer.DeviceInfoProviderDefault;
@@ -42,12 +37,14 @@ public class BaseApplication extends Application  {
 //                mXimalaya.setAppkey("f4d8f65918d9878e1702d49a8cdf0183");
 //                mXimalaya.setPackid("com.ximalaya.qunfeng");
 //                mXimalaya.init(this, mAppSecret, getDeviceInfoProvider(this));
-
             String mAppSecret = "ff31ae8153185db13b5f5393cae962c4";
             mXimalaya.setAppkey("be022ee6e9f19df55c4a6eb836b7b0b9");
             mXimalaya.setPackid("android.test");
             mXimalaya.init(this,mAppSecret,getDeviceInfoProvider(this));
         }
+
+        //初始化Log
+        LogUtil.init(this.getPackageName(), true);//获取到包名，是否发布
 
     }
 
