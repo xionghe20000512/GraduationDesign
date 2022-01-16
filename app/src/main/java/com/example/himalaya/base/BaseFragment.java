@@ -11,6 +11,10 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.ximalaya.ting.android.opensdk.model.album.Album;
+
+import java.util.List;
+
 public abstract class BaseFragment extends Fragment {
 
     private View mRootView;
@@ -23,4 +27,10 @@ public abstract class BaseFragment extends Fragment {
     }
 
     protected abstract View onSubViewLoaded(LayoutInflater layoutInflater, ViewGroup container);
+
+    public abstract void onRecommendListLoaded(List<Album> result);
+
+    public abstract void onLoaderMore(List<Album> result);
+
+    public abstract void onRefreshMore(List<Album> result);
 }

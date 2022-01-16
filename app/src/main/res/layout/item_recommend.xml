@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--设置圆角矩形（专辑条目）-->
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@drawable/shape_album_item_bg"
+    android:layout_height="75dp">
+
+<!--    圆角封面-->
+    <com.example.himalaya.views.RoundRectImageView
+        android:id="@+id/album_cover"
+        android:scaleType="fitXY"
+        android:layout_width="68dp"
+
+        android:layout_height="65dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="5dp"/>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:orientation="vertical"
+        android:layout_toRightOf="@+id/album_cover"
+        android:layout_marginLeft="10dp"
+        android:layout_height="match_parent">
+
+        <!--主标题：设为一行，尾部省略-->
+        <TextView
+            android:id="@+id/album_title_tv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:lines="1"
+            android:ellipsize="end"
+            android:layout_marginTop="5dp"
+            android:text="拿破仑《成功学全书》拿破仑《成功学全书》"
+            android:textSize="18sp"/>
+
+        <!--子标题-->
+        <TextView
+            android:id="@+id/album_description_tv"
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:layout_marginTop="3dp"
+            android:ellipsize="end"
+            android:text="为你开启成功之路，给你执行未来！一起行动.."
+            android:textColor="#ff848484"
+            android:textSize="12sp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+<!--播放量和集数-->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="6dp"
+                    android:layout_height="6dp"
+                    android:src="@mipmap/icon_play"/>
+                <TextView
+                    android:id="@+id/album_play_count"
+                    android:layout_width="45dp"
+                    android:layout_height="10dp"
+                    android:text="234.5万"
+                    android:textColor="#ff848484"
+                    android:textSize="7sp"/>
+            </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center_vertical"
+                android:layout_marginLeft="30dp"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="6dp"
+                    android:layout_height="6dp"
+                    android:src="@mipmap/icon_p"/>
+                <TextView
+                    android:id="@+id/album_content_size"
+                    android:layout_width="45dp"
+                    android:layout_height="wrap_content"
+                    android:text="23集"
+                    android:layout_marginLeft="2dp"
+                    android:textColor="#ff848484"
+                    android:textSize="7sp"/>
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

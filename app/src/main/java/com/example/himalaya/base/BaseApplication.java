@@ -18,13 +18,6 @@ public class BaseApplication extends Application  {
     public void onCreate() {
         super.onCreate();
 
-//        try {
-//            Thread.sleep(1000);
-//        } catch (InterruptedException e) {
-//            e.printStackTrace();
-//        }
-//        System.out.println("OAID: "+oaid);
-
         CommonRequest mXimalaya = CommonRequest.getInstanse();
         if (DTransferConstants.isRelease) {
             String mAppSecret = "8646d66d6abe2efd14f2891f9fd1c8af";
@@ -44,7 +37,7 @@ public class BaseApplication extends Application  {
         }
 
         //初始化Log
-        LogUtil.init(this.getPackageName(), true);//获取到包名，是否发布
+        LogUtil.init(this.getPackageName(), false);//获取到包名，是否发布
 
     }
 
@@ -56,20 +49,5 @@ public class BaseApplication extends Application  {
             }
         };
     }
-
-//    @Override
-//    public void OnSupport(boolean b, IdSupplier idSupplier) {
-//        if(idSupplier==null) {
-//            return;
-//        }
-//        oaid=idSupplier.getOAID();
-//
-//        StringBuilder builder=new StringBuilder();
-//        builder.append("support: ").append(idSupplier.isSupported()?"true":"false").append("\n");
-//        builder.append("OAID: ").append(oaid).append("\n");
-//
-//        String idstext=builder.toString();
-//        Log.d("SdkDemo: ", idstext);
-//    }
 
 }
