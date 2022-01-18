@@ -17,18 +17,18 @@ public class HistoryFragment extends BaseFragment {
         return rootView;
     }
 
-    @Override
-    public void onRecommendListLoaded(List<Album> result) {
-
-    }
-
-    @Override
-    public void onLoaderMore(List<Album> result) {
-
-    }
-
-    @Override
-    public void onRefreshMore(List<Album> result) {
-
-    }
+//    @Override
+//    public void onRecommendListLoaded(List<Album> result) {
+//
+//    }
+//
+//    @Override
+//    public void onLoaderMore(List<Album> result) {
+//
+//    }
+//
+//    @Override
+//    public void onRefreshMore(List<Album> result) {
+//
+//    }
 }

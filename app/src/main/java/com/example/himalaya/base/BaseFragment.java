@@ -28,9 +28,9 @@ public abstract class BaseFragment extends Fragment {
 
     protected abstract View onSubViewLoaded(LayoutInflater layoutInflater, ViewGroup container);
 
-    public abstract void onRecommendListLoaded(List<Album> result);
-
-    public abstract void onLoaderMore(List<Album> result);
-
-    public abstract void onRefreshMore(List<Album> result);
+//    public abstract void onRecommendListLoaded(List<Album> result);
+//
+//    public abstract void onLoaderMore(List<Album> result);
+//
+//    public abstract void onRefreshMore(List<Album> result);
 }

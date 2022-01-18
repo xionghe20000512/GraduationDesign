@@ -41,6 +41,7 @@
             android:layout_height="15dp"
             android:layout_marginTop="3dp"
             android:ellipsize="end"
+            android:lines="1"
             android:text="为你开启成功之路，给你执行未来！一起行动.."
             android:textColor="#ff848484"
             android:textSize="12sp"/>
@@ -89,7 +90,6 @@
                     android:textColor="#ff848484"
                     android:textSize="7sp"/>
             </LinearLayout>
-
 
         </LinearLayout>
 
