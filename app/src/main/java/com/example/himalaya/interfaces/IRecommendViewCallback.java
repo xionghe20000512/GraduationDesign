@@ -5,6 +5,7 @@ import com.ximalaya.ting.android.opensdk.model.album.Album;
 import java.util.List;
 
 //告知推荐UI
+//在presenter里调用,fragment里实现
 public interface IRecommendViewCallback {
     /**
      * 获取推荐内容的结果

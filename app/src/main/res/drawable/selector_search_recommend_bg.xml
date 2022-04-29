@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@drawable/shape_recommend_item_bg_normal" android:state_pressed="true" />
+    <item android:drawable="@drawable/shape_recommend_item_bg_press" />
+
+</selector>

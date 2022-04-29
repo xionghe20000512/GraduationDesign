@@ -13,4 +13,22 @@
             历史
         </item>
     </string-array>
+
+    <string name="play_mode_order_text">顺序播放</string>
+    <string name="play_mode_random_text">随机播放</string>
+    <string name="play_mode_list_play_text">列表循环</string>
+    <string name="play_mode_single_play_text">单曲循环</string>
+    <string name="order_text">顺序</string>
+    <string name="reverse_text">逆序</string>
+
+    <string name="pause_tips_text">点击播放</string>
+
+    <string name="listener_as_you_like_text">欢迎收听</string>
+    <string name="cancel_sub_tips_text">取消订阅</string>
+    <string name="sub_tips_text">订阅</string>
+    <string name="cancel_sub_success">退订成功</string>
+    <string name="cancel_sub_failed">退订失败</string>
+    <string name="no_sub_tips_text">当前还没有订阅内容，快去订阅吧！</string>
+    <string name="search_empty_tips_text">抱歉，未找到相应结果</string>
+    <string name="no_history_tips_text">暂无历史记录</string>
 </resources>

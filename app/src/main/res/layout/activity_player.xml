@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/track_title"
+        android:layout_marginTop="30dp"
+        android:textSize="20sp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:gravity="center"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="这是标题"/>
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/track_pager_view"
+        android:layout_below="@+id/track_title"
+        android:layout_marginBottom="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="30dp">
+    </androidx.viewpager.widget.ViewPager>
+
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="wrap_content">
+
+<!--        进度条和时间-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/current_position"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="00:00"
+                android:textSize="16sp"/>
+
+            <SeekBar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/track_seek_bar"
+                style="@style/Widget.AppCompat.ProgressBar.Horizontal"
+                android:layout_centerInParent="true"
+                android:layout_marginLeft="50dp"
+                android:layout_marginRight="50dp"/>
+
+            <TextView
+                android:layout_width="50dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/track_duration"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:gravity="center"
+                android:text="00:00"
+                android:textSize="16sp"/>
+
+        </RelativeLayout>
+
+<!--        播放控制-->
+        <LinearLayout
+            android:gravity="center_vertical"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/player_mode_switch_btn"
+                android:src="@drawable/selector_play_model_list_order"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:id="@+id/play_pre"
+                android:src="@drawable/selector_player_pre"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:id="@+id/play_or_pause_btn"
+                android:src="@drawable/selector_player_play"
+                android:layout_width="0dp"
+                android:layout_height="35dp"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:id="@+id/play_next"
+                android:src="@drawable/selector_player_next"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_weight="1"/>
+
+            <ImageView
+                android:id="@+id/player_list"
+                android:src="@drawable/selector_player_list"
+                android:layout_width="0dp"
+                android:layout_height="20dp"
+                android:layout_weight="1"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>

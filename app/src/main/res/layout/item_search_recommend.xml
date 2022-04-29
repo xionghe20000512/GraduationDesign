@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@drawable/selector_search_recommend_bg"
+    android:layout_height="30dp">
+
+<!--    适配器里设置点击事件-->
+
+    <ImageView
+        android:id="@+id/search_recommend_icon"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:src="@mipmap/search_dark"/>
+
+    <TextView
+        android:layout_toRightOf="@+id/search_recommend_icon"
+        android:id="@+id/search_recommend_item"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="#A6A6A6"
+        android:text="我是标题。。。"/>
+
+    <View
+        android:layout_width="1px"
+        android:layout_height="match_parent"
+        android:layout_alignParentBottom="true"
+        android:background="@color/white"/>
+
+</RelativeLayout>

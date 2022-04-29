@@ -17,6 +17,7 @@ public class FragmentCreator {
 
     private static Map<Integer, BaseFragment> sCache=new HashMap<>();//设置缓存是为了避免重复创建，如果创建了就直接从缓存里面拿
 
+    //MainContentAdapter调用，直接创建好Fragment
     public static BaseFragment getFragment(int index){
         BaseFragment baseFragment=sCache.get(index);
         if(baseFragment!=null){

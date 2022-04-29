@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout
+        android:id="@+id/search_result_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!--    展示搜索结果-->
+        <androidx.recyclerview.widget.RecyclerView
+            android:overScrollMode="never"
+            android:id="@+id/result_list_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout>
+
+<!--    展示联想词-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:visibility="gone"
+        android:overScrollMode="never"
+        android:id="@+id/search_recommend_list"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+<!--    展示热词（自定义控件）-->
+    <com.example.himalaya.views.FlowTextLayout
+        android:layout_margin="10dp"
+        android:id="@+id/recommend_hot_word_View"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</FrameLayout>

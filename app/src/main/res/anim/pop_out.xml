@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<set xmlns:android="http://schemas.android.com/apk/res/android">
+<!--    设置动画效果-->
+<!--    移动效果-->
+    <translate android:fromYDelta="0"
+        android:duration="300"
+        android:toYDelta="100%"/>
+
+<!--    背景变化效果-->
+    <alpha
+        android:fromAlpha="1.0"
+        android:toAlpha="0.8"
+        android:duration="300"/>
+</set>

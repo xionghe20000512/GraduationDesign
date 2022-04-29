@@ -1,44 +1,39 @@
 package com.example.himalaya.fragments;
 
+import android.content.Intent;
 import android.graphics.Rect;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.himalaya.DetailActivity;
 import com.example.himalaya.R;
-import com.example.himalaya.adapters.RecommendListAdapter;
+import com.example.himalaya.adapters.AlbumListAdapter;
 import com.example.himalaya.base.BaseFragment;
-import com.example.himalaya.interfaces.IRecommendPresenter;
 import com.example.himalaya.interfaces.IRecommendViewCallback;
+import com.example.himalaya.presenters.AlbumDetailPresenter;
 import com.example.himalaya.presenters.RecommendPresenter;
-import com.example.himalaya.utils.Constants;
 import com.example.himalaya.utils.LogUtil;
 import com.example.himalaya.views.UILoader;
-import com.ximalaya.ting.android.opensdk.constants.DTransferConstants;
-import com.ximalaya.ting.android.opensdk.datatrasfer.CommonRequest;
-import com.ximalaya.ting.android.opensdk.datatrasfer.IDataCallBack;
+import com.lcodecore.tkrefreshlayout.TwinklingRefreshLayout;
 import com.ximalaya.ting.android.opensdk.model.album.Album;
-import com.ximalaya.ting.android.opensdk.model.album.GussLikeAlbumList;
 
 import net.lucode.hackware.magicindicator.buildins.UIUtil;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-public class RecommendFragment extends BaseFragment implements IRecommendViewCallback, UILoader.OnRetryClickListener {
+public class RecommendFragment extends BaseFragment implements IRecommendViewCallback, UILoader.OnRetryClickListener, AlbumListAdapter.OnAlbumItemClickListener {
 
     private static final String TAG = "RecommendFragment" ;
     private View mRootView;
     private RecyclerView mRecommendRv;
-    private RecommendListAdapter mRecommendListAdapter;
+    private AlbumListAdapter mRecommendListAdapter;
     private RecommendPresenter mRecommendPresenter;
     private UILoader mUiLoader;
+    private TwinklingRefreshLayout mTwinklingRefreshLayout;
 
     @Override
     protected View onSubViewLoaded(final LayoutInflater layoutInflater, ViewGroup container){
@@ -75,6 +70,8 @@ public class RecommendFragment extends BaseFragment implements IRecommendViewCal
         //RecyclerView的使用
         //1.找到对应的控件
         mRecommendRv = mRootView.findViewById(R.id.recommend_list);
+        mTwinklingRefreshLayout = mRootView.findViewById(R.id.over_scroll_view);//找到控件(推荐界面添加下拉回弹效果)
+        mTwinklingRefreshLayout.setPureScrollModeOn();
         //2.设置布局管理器
         LinearLayoutManager linearLayoutManager=new LinearLayoutManager(getContext());
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);//设为垂直方向
@@ -90,8 +87,10 @@ public class RecommendFragment extends BaseFragment implements IRecommendViewCal
             }
         });
         //3.设置适配器
-        mRecommendListAdapter=new RecommendListAdapter();
+        mRecommendListAdapter=new AlbumListAdapter();
         mRecommendRv.setAdapter(mRecommendListAdapter);
+        //设置点击事件
+        mRecommendListAdapter.setAlbumItemClickListener(this);
         return mRootView;
     }
 
@@ -105,18 +104,21 @@ public class RecommendFragment extends BaseFragment implements IRecommendViewCal
         mUiLoader.updateStatus(UILoader.UIStatus.SUCCESS);
     }
 
+    //网络不好时调用此方法，显示相应的页面
     @Override
     public void onNetworkError() {
         LogUtil.d(TAG,"onNetworkError");
         mUiLoader.updateStatus(UILoader.UIStatus.NETWORK_ERROR);
     }
 
+    //内容为空时调用此方法，显示相应界面
     @Override
     public void onEmpty() {
         LogUtil.d(TAG,"onEmpty");
         mUiLoader.updateStatus(UILoader.UIStatus.EMPTY);
     }
 
+    //加载中调用此方法，显示相应界面
     @Override
     public void onLoading() {
         LogUtil.d(TAG,"onLoading");
@@ -139,5 +141,18 @@ public class RecommendFragment extends BaseFragment implements IRecommendViewCal
         if (mRecommendPresenter != null) {
             mRecommendPresenter.getRecommendList();
         }
+    }
+
+    //adapter里调用
+    @Override
+    public void onItemClick(int position, Album album) {
+        //完成界面的跳转
+
+        //设置跳转的目标专辑
+        AlbumDetailPresenter.getInstance().setTargetAlbum(album);
+
+        //item被点击了,跳转到详情界面
+        Intent intent=new Intent(getContext(), DetailActivity.class);
+        startActivity(intent);
     }
 }

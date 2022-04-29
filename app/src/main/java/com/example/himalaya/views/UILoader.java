@@ -42,7 +42,7 @@ public abstract class UILoader extends FrameLayout {
 
     public UILoader(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
-        //
+
         init();
     }
 
@@ -75,7 +75,7 @@ public abstract class UILoader extends FrameLayout {
         mLoadingView.setVisibility(mCurrentStatus==UIStatus.LOADING?VISIBLE:GONE);
 
         //加载成功
-        if (mSuccessView== null) {
+        if (mSuccessView == null) {
             mSuccessView=getSuccessView(this);
             addView(mSuccessView);
         }
@@ -83,7 +83,7 @@ public abstract class UILoader extends FrameLayout {
         mSuccessView.setVisibility(mCurrentStatus==UIStatus.SUCCESS?VISIBLE:GONE);
 
         //网络错误页面
-        if (mNetworkErrorView== null) {
+        if (mNetworkErrorView == null) {
             mNetworkErrorView=getNetWorkErrorView();
             addView(mNetworkErrorView);
         }
@@ -91,7 +91,7 @@ public abstract class UILoader extends FrameLayout {
         mNetworkErrorView.setVisibility(mCurrentStatus==UIStatus.NETWORK_ERROR?VISIBLE:GONE);
 
         //数据为空界面
-        if (mEmptyView== null) {
+        if (mEmptyView == null) {
             mEmptyView=getEmptyView();
             addView(mEmptyView);
         }
@@ -123,7 +123,7 @@ public abstract class UILoader extends FrameLayout {
     //所以不定的内容就交给RecommendFragment去实现
     protected abstract View getSuccessView(ViewGroup container);
 
-    private View getLoadingVIew() {
+    protected View getLoadingVIew() {
         return LayoutInflater.from(getContext()).inflate(R.layout.fragment_loading_view,this ,false);
     }
 
@@ -132,6 +132,7 @@ public abstract class UILoader extends FrameLayout {
     }
 
     public interface OnRetryClickListener{
+        //fragment里重写，UILoader调用
         void onRetryClick();
     }
 }

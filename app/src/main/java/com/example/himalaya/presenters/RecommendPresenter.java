@@ -2,20 +2,16 @@ package com.example.himalaya.presenters;
 
 import androidx.annotation.Nullable;
 
+import com.example.himalaya.data.XimalayaApi;
 import com.example.himalaya.interfaces.IRecommendPresenter;
 import com.example.himalaya.interfaces.IRecommendViewCallback;
-import com.example.himalaya.utils.Constants;
 import com.example.himalaya.utils.LogUtil;
-import com.ximalaya.ting.android.opensdk.constants.DTransferConstants;
-import com.ximalaya.ting.android.opensdk.datatrasfer.CommonRequest;
 import com.ximalaya.ting.android.opensdk.datatrasfer.IDataCallBack;
 import com.ximalaya.ting.android.opensdk.model.album.Album;
 import com.ximalaya.ting.android.opensdk.model.album.GussLikeAlbumList;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 //实现的是IRecommendPresenter接口里面的方法
 public class RecommendPresenter implements IRecommendPresenter {
@@ -23,6 +19,8 @@ public class RecommendPresenter implements IRecommendPresenter {
     private static final String TAG="RecommendPresenter";
 
     private List<IRecommendViewCallback> mCallbacks=new ArrayList<>();
+    private List<Album> mCurrentRecommend = null;
+    private List<Album> mRecommendList;
 
     private RecommendPresenter(){
 
@@ -54,29 +52,45 @@ public class RecommendPresenter implements IRecommendPresenter {
         return sInstance;
     }
 
+    /**
+     * 获取当前的推荐专辑列表
+     * 推荐专辑列表，使用之前要判空
+     * @return
+     */
+    public List<Album> getCurrentRecommend(){
+        return mCurrentRecommend;
+    }
+
     //获取推荐内容，（猜你喜欢）
     /*
     3.10.6 SDK接入文档
      */
     @Override
     public void getRecommendList() {
+        //如果内容不为空，那么直接用当前的内容
+        //相当于缓存
+        if (mRecommendList != null && mRecommendList.size() > 0) {
+            LogUtil.d(TAG,"getRecommendList --> from memory");
+            //数据回来以后就要更新UI界面的内容
+            handlerRecommendResult(mRecommendList);
+            return;
+        }
         //获取推荐内容
         //封装参数
         updateLoading();
-        Map<String, String> map = new HashMap<>();
-        //表示数据返回多少条
-        map.put(DTransferConstants.LIKE_COUNT, Constants.RECOMMEND_COUNT+"");
         //喜马拉雅获取推荐内容
-        CommonRequest.getGuessLikeAlbum(map, new IDataCallBack<GussLikeAlbumList>() {
+        XimalayaApi ximalayaApi = XimalayaApi.getXimalayaApi();
+        ximalayaApi.getRecommendList(new IDataCallBack<GussLikeAlbumList>() {
             @Override
             public void onSuccess(@Nullable GussLikeAlbumList gussLikeAlbumList) {
                 LogUtil.d(TAG,"thread name --> "+Thread.currentThread().getName());
                 //数据获取成功
                 if(gussLikeAlbumList!=null){
-                    List<Album> albumList = gussLikeAlbumList.getAlbumList();
+                    LogUtil.d(TAG,"getRecommendList --> from net");
+                    mRecommendList = gussLikeAlbumList.getAlbumList();
                     //数据回来以后就要更新UI界面的内容
                     //upRecommendUI(albumlist);
-                    handlerRecommendResult(albumList);
+                    handlerRecommendResult(mRecommendList);
                 }
             }
 
@@ -93,30 +107,33 @@ public class RecommendPresenter implements IRecommendPresenter {
     private void handlerError() {
         if (mCallbacks!=null) {
             for (IRecommendViewCallback callback : mCallbacks) {
-                callback.onNetworkError();
+                callback.onNetworkError();//fragment里实现onNetworkError()
             }
         }
     }
 
     private void handlerRecommendResult(List<Album> albumList) {
         if (albumList!=null) {
+            //测试，清空一下，让界面显示空
+            //albumList.clear();
             if (albumList.size()==0) {
                 for (IRecommendViewCallback callback : mCallbacks) {
-                    callback.onEmpty();
+                    callback.onEmpty();//fragment里实现
                 }
             }else{
                 //通知UI更新
                 //遍历mCallbacks集合里面每一个回调
                 for (IRecommendViewCallback callback : mCallbacks) {
-                    callback.onRecommendListLoaded(albumList);//更新UI
+                    callback.onRecommendListLoaded(albumList);//更新UI   //fragment里实现
                 }
+                this.mCurrentRecommend = albumList;
             }
         }
     }
 
     private void updateLoading(){
         for (IRecommendViewCallback callback : mCallbacks) {
-            callback.onLoading();
+            callback.onLoading();//fragment里实现
         }
     }
 
@@ -142,7 +159,7 @@ public class RecommendPresenter implements IRecommendPresenter {
     @Override
     public void unRegisterViewCallback(IRecommendViewCallback callback) {
         if(mCallbacks!=null){
-            mCallbacks.remove(mCallbacks);
+            mCallbacks.remove(callback);
         }
     }
 }
